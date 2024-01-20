@@ -15,11 +15,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
         String[] campeones = {"Shen","Sett","Khazix","Nilah","Kassadin","Akali","Blitzcrank","Ivern","Lux","Bardo","Thresh","Heimerdinger","Jhin","Aphelios","Zeri","Ashe"};
-        String campeon;
-        do {
-            System.out.println("Elige uno de los siguientes Campeones:\n"+ Arrays.toString(campeones));
-            campeon = userInput.nextLine();
-        }while (!opcionValida(campeones, campeon));
+        System.out.println("Elige uno de los siguientes Campeones:\n"+ Arrays.toString(campeones));
         String[] preguntas = {
                 "¿Es cuerpo a cuerpo?",
                 "¿Es de daño físico?",
@@ -39,10 +35,6 @@ public class Main {
         };
         Nodo raiz = new Nodo(preguntas[0],"No", null); // Pregunta 0
         Nodo puntero;
-        String respuesta;
-
-        System.out.println(raiz.getPregunta());
-        respuesta = userInput.nextLine();
 
         raiz.setHijoIzq(new Nodo(preguntas[1],"No",raiz));
         raiz.setHijoDer(new Nodo(preguntas[2],"No",raiz));
@@ -111,7 +103,7 @@ public class Main {
         puntero = puntero.getPadre(); // Pregunta 5
         puntero = puntero.getPadre(); // Pregunta 2
         puntero = puntero.getHijoDer(); // Pregunta 6
-        puntero.setHijoIzq(new Nodo(preguntas[13],"Si",puntero));
+        puntero.setHijoIzq(new Nodo(preguntas[13],"No",puntero));
         puntero.setHijoDer(new Nodo(preguntas[14],"No",puntero));
 
         puntero = puntero.getHijoIzq(); // Pregunta 13
@@ -130,7 +122,16 @@ public class Main {
         recorridoRecursivo(raiz);
     }
     public static void recorridoRecursivo(Nodo x){
-        System.out.println(x.getPregunta()+" "+x.getRespuesta());
+        Scanner userInput = new Scanner(System.in);
+        String respuesta = "";
+
+        if(x.getPregunta()!=null){
+            System.out.println(x.getPregunta());
+            respuesta = userInput.nextLine();
+        }
+        if(respuesta.equalsIgnoreCase("Si")){
+            x.setRespuesta(respuesta);
+        }
         if(x.getCampeon()!=null){
             System.out.println(x.getCampeon());
         }
