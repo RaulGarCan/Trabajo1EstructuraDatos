@@ -4,36 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
-    public static boolean opcionValida(String[] listaCampeones, String eleccion){
-        for(String s : listaCampeones){
-            if(eleccion.equalsIgnoreCase(s)){
-                return true;
-            }
-        }
-        return false;
-    }
-    public static void main(String[] args) {
-        Scanner userInput = new Scanner(System.in);
-        String[] campeones = {"Shen","Sett","Khazix","Nilah","Kassadin","Akali","Blitzcrank","Ivern","Lux","Bardo","Thresh","Heimerdinger","Jhin","Aphelios","Zeri","Ashe"};
-        System.out.println("Elige uno de los siguientes Campeones:\n"+ Arrays.toString(campeones));
-        String[] preguntas = {
-                "¿Es cuerpo a cuerpo?",
-                "¿Es de daño físico?",
-                "¿Es de daño mágico?",
-                "¿Es top?",
-                "¿Es mid?",
-                "¿Es mago?",
-                "¿Utiliza munición?",
-                "¿Es tanque?",
-                "¿Es jungla?",
-                "¿Es del vacío?",
-                "¿Es support?",
-                "¿Es humano?",
-                "¿Es support?",
-                "¿Es un artista?",
-                "¿Es de Zaun?"
-        };
-        Nodo raiz = new Nodo(preguntas[0],"No", null); // Pregunta 0
+    public static void rellenarDatos(Nodo raiz, String[] preguntas){
         Nodo puntero;
 
         raiz.setHijoIzq(new Nodo(preguntas[1],"No",raiz));
@@ -118,8 +89,6 @@ public class Main {
         puntero.getHijoIzq().setCampeon("Zeri");
         puntero.setHijoDer(new Nodo());
         puntero.getHijoDer().setCampeon("Ashe");
-
-        recorridoRecursivo(raiz);
     }
     public static void recorridoRecursivo(Nodo x){
         Scanner userInput = new Scanner(System.in);
@@ -148,5 +117,29 @@ public class Main {
         if(x.getHijoDer()!=null){
             recorridoRecursivo(x.getHijoDer());
         }
+    }
+    public static void main(String[] args) {
+        String[] campeones = {"Shen","Sett","Khazix","Nilah","Kassadin","Akali","Blitzcrank","Ivern","Lux","Bardo","Thresh","Heimerdinger","Jhin","Aphelios","Zeri","Ashe"};
+        System.out.println("Elige uno de los siguientes Campeones:\n"+ Arrays.toString(campeones));
+        String[] preguntas = {
+                "¿Es cuerpo a cuerpo?",
+                "¿Es de daño físico?",
+                "¿Es de daño mágico?",
+                "¿Es top?",
+                "¿Es mid?",
+                "¿Es mago?",
+                "¿Utiliza munición?",
+                "¿Es tanque?",
+                "¿Es jungla?",
+                "¿Es del vacío?",
+                "¿Es support?",
+                "¿Es humano?",
+                "¿Es support?",
+                "¿Es un artista?",
+                "¿Es de Zaun?"
+        };
+        Nodo raiz = new Nodo(preguntas[0],"No", null); // Pregunta 0
+        rellenarDatos(raiz, preguntas);
+        recorridoRecursivo(raiz);
     }
 }
