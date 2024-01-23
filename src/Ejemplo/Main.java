@@ -3,6 +3,9 @@ package Ejemplo;
 import java.util.ArrayList;
 
 public class Main {
+    static ArrayList<Integer> pre = new ArrayList<>();
+    static ArrayList<Integer> in = new ArrayList<>();
+    static ArrayList<Integer> post = new ArrayList<>();
     public static void main(String[] args) {
         Nodo puntero;
         Nodo raiz = new Nodo(1);
@@ -21,6 +24,10 @@ public class Main {
 
         //recorrerEnBucle(raiz);
         recorridoRecursivo(raiz);
+
+        System.out.println(pre);
+        System.out.println(in);
+        System.out.println(post);
     }
 
     public static void recorrerEnBucle(Nodo raiz){
@@ -41,11 +48,14 @@ public class Main {
     }
     public static void recorridoRecursivo(Nodo x){
         System.out.println(x.getValor());
+        pre.add(x.getValor());
         if(x.getHijoIzq() != null){
             recorridoRecursivo(x.getHijoIzq());
         }
+        in.add(x.getValor());
         if(x.getHijoDer()!=null){
             recorridoRecursivo(x.getHijoDer());
         }
+        post.add(x.getValor());
     }
 }
