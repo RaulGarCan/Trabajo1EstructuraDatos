@@ -48,7 +48,7 @@ public class Main {
         puntero.setHijoIzq(new Nodo());
         puntero.getHijoIzq().setCampeon("Blitzcrank");
         puntero.setHijoDer(new Nodo());
-        puntero.getHijoDer().setCampeon("Ivern");
+        puntero.getHijoDer().setCampeon("Maokai");
 
         puntero = raiz.getHijoDer(); // Pregunta 2
         puntero.setHijoIzq(new Nodo(preguntas[5],"No",puntero));
@@ -119,7 +119,7 @@ public class Main {
         }
     }
     public static void main(String[] args) {
-        String[] campeones = {"Shen","Sett","Khazix","Nilah","Kassadin","Akali","Blitzcrank","Ivern","Lux","Bardo","Thresh","Heimerdinger","Jhin","Aphelios","Zeri","Ashe"};
+        String[] campeones = {"Shen","Sett","Khazix","Nilah","Kassadin","Akali","Blitzcrank","Maokai","Lux","Bardo","Thresh","Heimerdinger","Jhin","Aphelios","Zeri","Ashe"};
         System.out.println("Elige uno de los siguientes Campeones:\n"+ Arrays.toString(campeones));
         String[] preguntas = {
                 "¿Es cuerpo a cuerpo?",
