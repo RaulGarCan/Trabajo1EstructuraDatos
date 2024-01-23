@@ -7,20 +7,24 @@ public class Main {
     static ArrayList<Integer> in = new ArrayList<>();
     static ArrayList<Integer> post = new ArrayList<>();
     public static void main(String[] args) {
-        Nodo puntero;
-        Nodo raiz = new Nodo(1);
+        //arbolBinario();
+        arbolNoBinario();
+    }
+    public static void arbolBinario(){
+        NodoBinario puntero;
+        NodoBinario raiz = new NodoBinario(1);
 
-        raiz.setHijoIzq(new Nodo(2));
+        raiz.setHijoIzq(new NodoBinario(2));
         puntero = raiz.getHijoIzq();
-        puntero.setHijoDer(new Nodo(3));
+        puntero.setHijoDer(new NodoBinario(3));
         puntero = puntero.getHijoDer();
-        puntero.setHijoIzq(new Nodo(4));
+        puntero.setHijoIzq(new NodoBinario(4));
 
-        raiz.setHijoDer(new Nodo(5));
+        raiz.setHijoDer(new NodoBinario(5));
         puntero = raiz.getHijoDer();
-        puntero.setHijoIzq(new Nodo(6));
+        puntero.setHijoIzq(new NodoBinario(6));
         puntero = raiz.getHijoDer();
-        puntero.setHijoDer(new Nodo(7));
+        puntero.setHijoDer(new NodoBinario(7));
 
         //recorrerEnBucle(raiz);
         recorridoRecursivo(raiz);
@@ -29,13 +33,50 @@ public class Main {
         System.out.println(in);
         System.out.println(post);
     }
+    public static void arbolNoBinario(){
+        NodoNoBinario puntero;
+        NodoNoBinario raiz = new NodoNoBinario(1);
+        NodoNoBinario[] hijos = {
+                new NodoNoBinario(2),
+                new NodoNoBinario(3),
+                new NodoNoBinario(4),
+                new NodoNoBinario(5)
+        };
+        raiz.addHijos(hijos);
 
-    public static void recorrerEnBucle(Nodo raiz){
-        ArrayList<Nodo> noVisitado = new ArrayList<>();
+        puntero = raiz.getHijos().get(0);
+        hijos = new NodoNoBinario[]{
+                new NodoNoBinario(6),
+                new NodoNoBinario(7)
+        };
+        puntero.addHijos(hijos);
+
+        puntero = puntero.hijos.get(0);
+        puntero.addHijo(new NodoNoBinario(8));
+        puntero = raiz.getHijos().get(1);
+        hijos = new NodoNoBinario[]{
+                new NodoNoBinario(9),
+                new NodoNoBinario(10)
+        };
+        puntero.addHijos(hijos);
+
+        puntero = raiz.getHijos().get(3);
+        hijos = new NodoNoBinario[]{
+                new NodoNoBinario(11),
+                new NodoNoBinario(12),
+                new NodoNoBinario(13)
+        };
+        puntero.addHijos(hijos);
+
+        recorridoRecursivo(raiz);
+    }
+
+    public static void recorrerEnBucle(NodoBinario raiz){
+        ArrayList<NodoBinario> noVisitado = new ArrayList<>();
         noVisitado.add(raiz);
 
         while (!noVisitado.isEmpty()){
-            Nodo visitado = noVisitado.get(0);
+            NodoBinario visitado = noVisitado.get(0);
             System.out.println(visitado.getValor());
             noVisitado.remove(0);
             if(visitado.getHijoIzq()!=null){
@@ -46,7 +87,7 @@ public class Main {
             }
         }
     }
-    public static void recorridoRecursivo(Nodo x){
+    public static void recorridoRecursivo(NodoBinario x){
         System.out.println(x.getValor());
         pre.add(x.getValor());
         if(x.getHijoIzq() != null){
@@ -57,5 +98,11 @@ public class Main {
             recorridoRecursivo(x.getHijoDer());
         }
         post.add(x.getValor());
+    }
+    public static void recorridoRecursivo(NodoNoBinario x){
+        for(NodoNoBinario hijo : x.getHijos()){
+            recorridoRecursivo(hijo);
+        }
+        System.out.println(x.getValor());
     }
 }

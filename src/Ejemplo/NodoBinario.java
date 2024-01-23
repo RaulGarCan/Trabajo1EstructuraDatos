@@ -1,11 +1,11 @@
 package Ejemplo;
 
-public class Nodo {
+public class NodoBinario {
     private int valor;
-    private Nodo hijoIzq;
-    private Nodo hijoDer;
+    private NodoBinario hijoIzq;
+    private NodoBinario hijoDer;
 
-    public Nodo(int valor) {
+    public NodoBinario(int valor) {
         this.valor = valor;
         this.hijoIzq = null;
         this.hijoDer = null;
@@ -19,19 +19,19 @@ public class Nodo {
         this.valor = valor;
     }
 
-    public Nodo getHijoIzq() {
+    public NodoBinario getHijoIzq() {
         return hijoIzq;
     }
 
-    public void setHijoIzq(Nodo hijoIzq) {
+    public void setHijoIzq(NodoBinario hijoIzq) {
         this.hijoIzq = hijoIzq;
     }
 
-    public Nodo getHijoDer() {
+    public NodoBinario getHijoDer() {
         return hijoDer;
     }
 
-    public void setHijoDer(Nodo hijoDer) {
+    public void setHijoDer(NodoBinario hijoDer) {
         this.hijoDer = hijoDer;
     }
 }
