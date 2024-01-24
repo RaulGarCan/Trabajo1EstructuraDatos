@@ -1,6 +1,7 @@
 package Ejemplo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     static ArrayList<Integer> pre = new ArrayList<>();
@@ -8,7 +9,8 @@ public class Main {
     static ArrayList<Integer> post = new ArrayList<>();
     public static void main(String[] args) {
         //arbolBinario();
-        arbolNoBinario();
+        //arbolNoBinario();
+        grafo();
     }
     public static void arbolBinario(){
         NodoBinario puntero;
@@ -70,6 +72,54 @@ public class Main {
 
         recorridoRecursivo(raiz);
     }
+    public static void grafo(){
+        ArrayList<NodoGrafo> grafo = new ArrayList<>();
+
+        grafo.add(new NodoGrafo(1));
+        grafo.add(new NodoGrafo(2));
+        grafo.add(new NodoGrafo(3));
+        grafo.add(new NodoGrafo(4));
+        grafo.add(new NodoGrafo(5));
+        grafo.add(new NodoGrafo(6));
+        grafo.add(new NodoGrafo(7));
+
+        NodoGrafo puntero;
+        puntero = grafo.get(0); // 1
+        puntero.addVecino(grafo.get(1));
+        puntero.addVecino(grafo.get(5));
+
+        puntero = grafo.get(1); // 2
+        puntero.addVecino(grafo.get(0));
+        puntero.addVecino(grafo.get(4));
+        puntero.addVecino(grafo.get(2));
+
+        puntero = grafo.get(2); // 3
+        puntero.addVecino(grafo.get(1));
+        puntero.addVecino(grafo.get(5));
+        puntero.addVecino(grafo.get(6));
+        puntero.addVecino(grafo.get(3));
+
+        puntero = grafo.get(3); // 4
+        puntero.addVecino(grafo.get(4));
+        puntero.addVecino(grafo.get(2));
+        puntero.addVecino(grafo.get(6));
+
+        puntero = grafo.get(4); // 5
+        puntero.addVecino(grafo.get(1));
+        puntero.addVecino(grafo.get(3));
+
+        puntero = grafo.get(5); // 6
+        puntero.addVecino(grafo.get(0));
+        puntero.addVecino(grafo.get(2));
+        puntero.addVecino(grafo.get(6));
+
+        puntero = grafo.get(6); // 7
+        puntero.addVecino(grafo.get(5));
+        puntero.addVecino(grafo.get(2));
+        puntero.addVecino(grafo.get(3));
+
+        recorridoRecursivo(grafo.get(0));
+    }
 
     public static void recorrerEnBucle(NodoBinario raiz){
         ArrayList<NodoBinario> noVisitado = new ArrayList<>();
@@ -102,6 +152,13 @@ public class Main {
     public static void recorridoRecursivo(NodoNoBinario x){
         for(NodoNoBinario hijo : x.getHijos()){
             recorridoRecursivo(hijo);
+        }
+        System.out.println(x.getValor());
+    }
+
+    public static void recorridoRecursivo(NodoGrafo x){
+        for(NodoGrafo vecino : x.getVecinos()){
+            recorridoRecursivo(vecino);
         }
         System.out.println(x.getValor());
     }
