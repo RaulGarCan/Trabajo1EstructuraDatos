@@ -7,6 +7,7 @@ public class Main {
     static ArrayList<Integer> pre = new ArrayList<>();
     static ArrayList<Integer> in = new ArrayList<>();
     static ArrayList<Integer> post = new ArrayList<>();
+    static ArrayList<NodoGrafo> visitados = new ArrayList<>();
     public static void main(String[] args) {
         //arbolBinario();
         //arbolNoBinario();
@@ -157,9 +158,12 @@ public class Main {
     }
 
     public static void recorridoRecursivo(NodoGrafo x){
-        for(NodoGrafo vecino : x.getVecinos()){
-            recorridoRecursivo(vecino);
+        if(!visitados.contains(x)) {
+            visitados.add(x);
+            for (NodoGrafo vecino : x.getVecinos()) {
+                recorridoRecursivo(vecino);
+            }
+            System.out.println(x.getValor());
         }
-        System.out.println(x.getValor());
     }
 }
