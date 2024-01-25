@@ -8,10 +8,12 @@ public class Main {
     static ArrayList<Integer> in = new ArrayList<>();
     static ArrayList<Integer> post = new ArrayList<>();
     static ArrayList<NodoGrafo> visitados = new ArrayList<>();
+    static NodoBinario espejo = new NodoBinario(1);
     public static void main(String[] args) {
-        //arbolBinario();
+        arbolBinario();
         //arbolNoBinario();
-        grafo();
+        //grafo();
+
     }
     public static void arbolBinario(){
         NodoBinario puntero;
@@ -30,11 +32,14 @@ public class Main {
         puntero.setHijoDer(new NodoBinario(7));
 
         //recorrerEnBucle(raiz);
-        recorridoRecursivo(raiz);
+        //recorridoRecursivo(raiz);
 
-        System.out.println(pre);
-        System.out.println(in);
-        System.out.println(post);
+        //System.out.println(pre);
+        //System.out.println(in);
+        //System.out.println(post);
+
+        crearEspejo(raiz);
+        recorridoRecursivo(espejo);
     }
     public static void arbolNoBinario(){
         NodoNoBinario puntero;
@@ -164,6 +169,16 @@ public class Main {
                 recorridoRecursivo(vecino);
             }
             System.out.println(x.getValor());
+        }
+    }
+    public static void crearEspejo(NodoBinario x){
+        if(x.getHijoIzq() != null){
+            espejo.setHijoDer(x.getHijoIzq());
+            recorridoRecursivo(x.getHijoIzq());
+        }
+        if(x.getHijoDer()!=null){
+            espejo.setHijoIzq(x.getHijoDer());
+            recorridoRecursivo(x.getHijoDer());
         }
     }
 }
