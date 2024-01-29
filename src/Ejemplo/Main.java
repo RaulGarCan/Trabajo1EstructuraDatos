@@ -1,5 +1,7 @@
 package Ejemplo;
 
+import QuienEsQuienLoL.Nodo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +12,10 @@ public class Main {
     static ArrayList<NodoGrafo> visitados = new ArrayList<>();
     static NodoBinario espejo = new NodoBinario(1);
     public static void main(String[] args) {
-        arbolBinario();
+        //arbolBinario();
         //arbolNoBinario();
         //grafo();
-
+        ejGrafo();
     }
     public static void arbolBinario(){
         NodoBinario puntero;
@@ -180,5 +182,58 @@ public class Main {
             espejo.setHijoIzq(x.getHijoDer());
             recorridoRecursivo(x.getHijoDer());
         }
+    }
+    public static void ejGrafo(){
+        ArrayList<NodoGrafo> grafos = new ArrayList<>();
+        grafos.add(new NodoGrafo(1));
+        grafos.add(new NodoGrafo(2));
+        grafos.add(new NodoGrafo(3));
+        grafos.add(new NodoGrafo(4));
+        grafos.add(new NodoGrafo(5));
+        grafos.add(new NodoGrafo(6));
+        grafos.add(new NodoGrafo(7));
+        grafos.add(new NodoGrafo(8));
+        grafos.add(new NodoGrafo(9));
+
+        NodoGrafo puntero;
+        puntero = grafos.get(0); // 1
+        puntero.addVecino(grafos.get(1));
+        puntero.addVecino(grafos.get(2));
+        puntero.addVecino(grafos.get(3));
+
+        puntero = grafos.get(1); // 2
+        puntero.addVecino(grafos.get(0));
+        puntero.addVecino(grafos.get(2));
+        puntero.addVecino(grafos.get(5));
+
+        puntero = grafos.get(2); // 3
+        puntero.addVecino(grafos.get(0));
+        puntero.addVecino(grafos.get(1));
+
+        puntero = grafos.get(3); // 4
+        puntero.addVecino(grafos.get(0));
+        puntero.addVecino(grafos.get(4));
+
+        puntero = grafos.get(4); // 5
+        puntero.addVecino(grafos.get(3));
+        puntero.addVecino(grafos.get(5));
+
+        puntero = grafos.get(5); // 6
+        puntero.addVecino(grafos.get(4));
+        puntero.addVecino(grafos.get(1));
+        puntero.addVecino(grafos.get(6));
+        puntero.addVecino(grafos.get(7));
+
+        puntero = grafos.get(6); // 7
+        puntero.addVecino(grafos.get(5));
+
+        puntero = grafos.get(7); // 8
+        puntero.addVecino(grafos.get(8));
+        puntero.addVecino(grafos.get(5));
+
+        puntero = grafos.get(8); // 9
+        puntero.addVecino(grafos.get(7));
+
+        recorridoRecursivo(grafos.get(0));
     }
 }
