@@ -10,12 +10,14 @@ public class Main {
     static ArrayList<Integer> in = new ArrayList<>();
     static ArrayList<Integer> post = new ArrayList<>();
     static ArrayList<NodoGrafo> visitados = new ArrayList<>();
-    static NodoBinario espejo = new NodoBinario(1);
+    static NodoBinario espejo;
+    static NodoBinario puntero;
     public static void main(String[] args) {
         //arbolBinario();
         //arbolNoBinario();
         //grafo();
-        ejGrafo();
+        //ejGrafo();
+        crearArbolEj();
     }
     public static void arbolBinario(){
         NodoBinario puntero;
@@ -40,8 +42,7 @@ public class Main {
         //System.out.println(in);
         //System.out.println(post);
 
-        crearEspejo(raiz);
-        recorridoRecursivo(espejo);
+        recorridoRecursivo(raiz);
     }
     public static void arbolNoBinario(){
         NodoNoBinario puntero;
@@ -173,14 +174,30 @@ public class Main {
             System.out.println(x.getValor());
         }
     }
-    public static void crearEspejo(NodoBinario x){
+    public static void crearArbolEj(){
+        NodoBinario raiz = new NodoBinario(1);
+        raiz.setHijoIzq(new NodoBinario(2));
+        raiz.setHijoDer(new NodoBinario(3));
+
+        raiz.getHijoIzq().setHijoIzq(new NodoBinario(4));
+        raiz.getHijoIzq().setHijoDer(new NodoBinario(5));
+
+        recorridoRecursivo(raiz);
+        System.out.println("---------------------------------");
+        espejo = new NodoBinario(raiz.getValor());
+        puntero = espejo;
+        crearEspejo(raiz, puntero);
+        recorridoRecursivo(espejo);
+    }
+    public static void crearEspejo(NodoBinario x, NodoBinario y){
         if(x.getHijoIzq() != null){
-            espejo.setHijoDer(x.getHijoIzq());
-            recorridoRecursivo(x.getHijoIzq());
+            y.setHijoDer(new NodoBinario(x.getHijoIzq().getValor()));
+            crearEspejo(x.getHijoIzq(),y.getHijoDer());
         }
         if(x.getHijoDer()!=null){
-            espejo.setHijoIzq(x.getHijoDer());
-            recorridoRecursivo(x.getHijoDer());
+            y.setHijoIzq(new NodoBinario(x.getHijoDer().getValor()));
+
+            crearEspejo(x.getHijoDer(),y.getHijoIzq());
         }
     }
     public static void ejGrafo(){
