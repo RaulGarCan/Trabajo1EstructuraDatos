@@ -12,12 +12,16 @@ public class Main {
     static ArrayList<NodoGrafo> visitados = new ArrayList<>();
     static NodoBinario espejo;
     static NodoBinario puntero;
+    static ArrayList<NodoGrafo> ruta = new ArrayList<>();
+    static NodoGrafo inicio;
+    static NodoGrafo fin;
     public static void main(String[] args) {
         //arbolBinario();
         //arbolNoBinario();
         //grafo();
-        //ejGrafo();
-        crearArbolEj();
+
+        //crearArbolEj();
+        ejGrafo();
     }
     public static void arbolBinario(){
         NodoBinario puntero;
@@ -251,6 +255,27 @@ public class Main {
         puntero = grafos.get(8); // 9
         puntero.addVecino(grafos.get(7));
 
-        recorridoRecursivo(grafos.get(0));
+        inicio = grafos.get(0);
+        fin = grafos.get(8);
+
+        calcularRuta(inicio);
+        for(NodoGrafo n : ruta){
+            System.out.print(n.getValor()+" ");
+        }
+    }
+    public static int calcularRuta(NodoGrafo x){
+        ruta.add(new NodoGrafo(x.getValor()));
+        if(x==fin){
+            return -1;
+        }
+        if(!visitados.contains(x)) {
+            visitados.add(x);
+            for (NodoGrafo vecino : x.getVecinos()) {
+                if(calcularRuta(vecino)==-1){
+                    return -1;
+                }
+            }
+        }
+        return 0;
     }
 }
