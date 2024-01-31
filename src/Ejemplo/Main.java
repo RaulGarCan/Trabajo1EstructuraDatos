@@ -255,8 +255,9 @@ public class Main {
         puntero = grafos.get(8); // 9
         puntero.addVecino(grafos.get(7));
 
-        inicio = grafos.get(0);
+        inicio = grafos.get(5);
         fin = grafos.get(8);
+        ruta.add(fin); // Es necesario añadir el nodo final porque se omite una vez lo encuentra (causado por el condicional x==fin)
 
         calcularRuta(inicio);
         for(NodoGrafo n : ruta){
@@ -264,7 +265,6 @@ public class Main {
         }
     }
     public static int calcularRuta(NodoGrafo x){
-        ruta.add(new NodoGrafo(x.getValor()));
         if(x==fin){
             return -1;
         }
@@ -272,6 +272,7 @@ public class Main {
             visitados.add(x);
             for (NodoGrafo vecino : x.getVecinos()) {
                 if(calcularRuta(vecino)==-1){
+                    ruta.add(new NodoGrafo(x.getValor()));
                     return -1;
                 }
             }
